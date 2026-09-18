@@ -1,4 +1,4 @@
-# Proyecto 1 — Reconocimiento de figuras geométricas
+# PROYECTO-1-MYP — Reconocimiento de figuras geométricas
 
 Proyecto de Modelado y Programación para detectar y clasificar figuras geométricas en imágenes BMP.
 
