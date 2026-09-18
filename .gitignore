@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# Java
+*.class
+target/
+
+# IDEs
+.vscode/
+.idea/
+
+# Test and build output
+.pytest_cache/
+coverage/
+*.log
+
+# Operating system
+Thumbs.db
+desktop.ini
