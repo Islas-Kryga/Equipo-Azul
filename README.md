@@ -28,8 +28,8 @@ El programa recibirá la ruta de una imagen `.bmp` y reportará las figuras enco
 1. Clona el repositorio:
 
    ```bash
-   git clone URL_DEL_REPOSITORIO
-   cd hitchcock
+   git clone https://github.com/Islas-Kryga/PROYECTO-1-MYP.git
+   cd PROYECTO-1-MYP
    ```
 
 2. Crea una rama para tu cambio:
