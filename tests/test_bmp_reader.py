@@ -3,8 +3,8 @@ import struct
 import unittest
 
 from src.bmp_reader import BmpReader
-from src.exceptions import BmpFormatError
-from src.models import Point
+from src.exceptions import BmpFileError, BmpFormatError
+from src.models import BmpImage, BoundingBox, FigureRegion, Point
 
 
 def make_bmp(width, height, rows, bits_per_pixel=24):
@@ -66,11 +66,33 @@ class BmpReaderTests(unittest.TestCase):
         with self.assertRaises(BmpFormatError):
             BmpReader().read_stream(io.BytesIO(data))
 
-    def test_rejects_unsupported_bit_depth(self):
+    def test_rejects_16_bit_bmp(self):
         with self.assertRaises(BmpFormatError):
             BmpReader().read_stream(
-                io.BytesIO(make_bmp(1, 1, [[(0, 0, 0)]], bits_per_pixel=32)[:28] + b"\x00" * 26)
+                io.BytesIO(make_bmp(1, 1, [[(0, 0, 0)]], bits_per_pixel=16))
             )
+
+    def test_reports_missing_file_with_a_specific_error(self):
+        with self.assertRaises(BmpFileError):
+            BmpReader().read("archivo-que-no-existe.bmp")
+
+
+class BmpImageTests(unittest.TestCase):
+    def test_rejects_pixels_with_wrong_dimensions(self):
+        with self.assertRaises(ValueError):
+            BmpImage(2, 1, [[(0, 0, 0)]])
+
+    def test_rejects_color_channels_outside_rgb_range(self):
+        with self.assertRaises(ValueError):
+            BmpImage(1, 1, [[(256, 0, 0)]])
+
+    def test_exposes_regions_with_their_area_and_dimensions(self):
+        pixels = frozenset({Point(1, 2), Point(2, 2), Point(1, 3)})
+        region = FigureRegion((10, 20, 30), pixels, BoundingBox(1, 2, 2, 3))
+
+        self.assertEqual(3, region.area)
+        self.assertEqual(2, region.bounds.width)
+        self.assertEqual(2, region.bounds.height)
 
 
 if __name__ == "__main__":

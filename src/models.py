@@ -46,7 +46,7 @@ class FigureRegion:
 
 
 class BmpImage:
-    """Imagen inmutable en memoria con colores RGB de 8 bits por canal."""
+    """Representación sencilla de una imagen para el resto del programa."""
 
     def __init__(
         self,
@@ -63,7 +63,10 @@ class BmpImage:
         for row in pixels:
             normalized_row = []
             for color in row:
-                if len(color) != 3 or any(not 0 <= channel <= 255 for channel in color):
+                if len(color) != 3 or any(
+                    not isinstance(channel, int) or not 0 <= channel <= 255
+                    for channel in color
+                ):
                     raise ValueError("Cada color debe ser una tupla RGB válida.")
                 normalized_row.append(tuple(color))
             normalized.append(tuple(normalized_row))

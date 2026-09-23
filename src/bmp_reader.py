@@ -74,7 +74,13 @@ class BmpReader:
             y = file_row if signed_height < 0 else height - file_row - 1
             rows[y] = row
 
-        return BmpImage(width, height, [row for row in rows if row is not None])
+        # El formato BMP guarda normalmente la primera fila al final.
+        image_rows = []
+        for row in rows:
+            if row is None:
+                raise BmpFormatError("No se pudo reconstruir una fila de píxeles.")
+            image_rows.append(row)
+        return BmpImage(width, height, image_rows)
 
     @staticmethod
     def _read_exact(stream: BinaryIO, size: int) -> bytes:
