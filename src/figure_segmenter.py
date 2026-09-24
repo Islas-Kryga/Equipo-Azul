@@ -1,6 +1,6 @@
 """Segmentación de figuras geométricas mediante BFS."""
 
-from collections import deque
+from collections import Counter, deque
 from typing import List, Set
 
 from .models import BmpImage, BoundingBox, FigureRegion, Point, RgbColor
@@ -17,16 +17,32 @@ class FigureSegmenter:
         self.background_color: RgbColor = self._detect_background_color()
 
     def _detect_background_color(self) -> RgbColor:
+        """
+        Determina el color de fondo muestreando el perímetro exterior completo de la imagen.
+        Tomando el caso de la existencia de figuras en las esquinas. El color más repetido 
+        en los bordes exteriores será el fondo.
+        """
         w, h = self.image.width, self.image.height
-        corners = [
-            self.image.pixel_at(Point(0, 0)),
-            self.image.pixel_at(Point(w - 1, 0)),
-            self.image.pixel_at(Point(0, h - 1)),
-            self.image.pixel_at(Point(w - 1, h - 1)),
-        ]
-        return max(set(corners), key=corners.count)
+        border_colors = []
+
+        # 1. Filas superior e inferior
+        for x in range(w):
+            border_colors.append(self.image.pixel_at(Point(x, 0)))
+            border_colors.append(self.image.pixel_at(Point(x, h - 1)))
+
+        # 2. Columnas izquierda y derecha (sin repetir las esquinas)
+        for y in range(1, h - 1):
+            border_colors.append(self.image.pixel_at(Point(0, y)))
+            border_colors.append(self.image.pixel_at(Point(w - 1, y)))
+
+        color_counts = Counter(border_colors)
+        most_common_color, _ = color_counts.most_common(1)[0]
+        return most_common_color
 
     def segment(self) -> List[FigureRegion]:
+        """
+        Escanea la imagen completa y extrae cada componente conexa (figura).
+        """
         visited: Set[Point] = set()
         figures: List[FigureRegion] = []
 
@@ -56,6 +72,7 @@ class FigureSegmenter:
         min_x, max_x = start.x, start.x
         min_y, max_y = start.y, start.y
 
+        # Vecindad-4: arriba, abajo, izquierda, derecha
         offsets = [(0, -1), (0, 1), (-1, 0), (1, 0)]
 
         while queue:
