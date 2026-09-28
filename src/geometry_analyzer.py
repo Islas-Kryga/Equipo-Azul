@@ -137,8 +137,6 @@ class GeometryAnalyzer:
         if not boundary:
             return False
 
-        # Un círculo debe tener aproximadamente el mismo ancho
-        # y alto.
         if abs(width - height) > 1:
             return False
 
@@ -174,4 +172,4 @@ class GeometryAnalyzer:
 
         variation = math.sqrt(variance) / average
 
-        return variation < 0.02
+        return variation < 0.04
