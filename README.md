@@ -19,8 +19,35 @@ El programa recibirá la ruta de una imagen `.bmp` y reportará las figuras enco
 └── tests/      # Pruebas automatizadas
 ```
 
+## Ejecución
+
+El programa se ejecuta desde la raíz del repositorio indicando la ruta de una imagen BMP:
+
+```bash
+python3 -m src.main <ruta_imagen.bmp>
+```
+
+Por ejemplo:
+
+```bash
+python3 -m src.main imagenes/prueba01.bmp
+```
+
+La salida muestra la cantidad de figuras encontradas y, para cada una, su categoría y color en formato hexadecimal.
+
+Ejemplo:
+
+```text
+Figuras encontradas: 1
+
+Figura 1
+Categoría: T
+Color: #FF0000
+```
+
 ## Integrantes
 
+- Jesús Eliuth Martínez Mendoza.
 - Pendiente de completar.
 
 ## Cómo colaborar
@@ -52,3 +79,4 @@ El programa recibirá la ruta de una imagen `.bmp` y reportará las figuras enco
    ```
 
 No trabajen directamente sobre `main`; cada cambio debe pasar por una rama y un Pull Request.
+
