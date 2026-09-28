@@ -48,6 +48,7 @@ Color: #FF0000
 ## Integrantes
 
 - Jesús Eliuth Martínez Mendoza.
+- Miroslava Mora Espinosa
 - Pendiente de completar.
 
 ## Cómo colaborar
