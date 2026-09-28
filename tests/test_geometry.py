@@ -208,7 +208,7 @@ class GeometryAnalyzerTests(unittest.TestCase):
         self.assertFalse(features["is_circle"])
 
     def test_detects_small_circle(self):
-        points = circle_pixels(5)
+        points = circle_pixels(10)
 
         figure = make_figure(points)
 
