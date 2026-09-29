@@ -15,8 +15,10 @@ El programa recibirá la ruta de una imagen `.bmp` y reportará las figuras enco
 .
 ├── docs/       # Reporte técnico y documentación
 ├── imagenes/   # Imágenes de prueba y resultados esperados
+├── REPORTE_LM.md  # Reporte de uso de modelo de lenguaje
 ├── src/        # Código fuente
-└── tests/      # Pruebas automatizadas
+├── tests/      # Pruebas automatizadas
+└── tools/      # Herramienta para regenerar el banco de imágenes
 ```
 
 ## Ejecución
@@ -24,13 +26,13 @@ El programa recibirá la ruta de una imagen `.bmp` y reportará las figuras enco
 El programa se ejecuta desde la raíz del repositorio indicando la ruta de una imagen BMP:
 
 ```bash
-python3 -m src.main <ruta_imagen.bmp>
+python -m src.main <ruta_imagen.bmp>
 ```
 
 Por ejemplo:
 
 ```bash
-python3 -m src.main imagenes/prueba01.bmp
+python -m src.main imagenes/prueba01.bmp
 ```
 
 La salida muestra la cantidad de figuras encontradas y, para cada una, su categoría y color en formato hexadecimal.
@@ -45,11 +47,44 @@ Categoría: T
 Color: #FF0000
 ```
 
+## Preparación y pruebas
+
+Se necesita Python 3. Para instalar la herramienta de pruebas:
+
+```bash
+python -m pip install pytest
+```
+
+Para ejecutar todas las pruebas:
+
+```bash
+python -m pytest -q
+```
+
+Para regenerar el banco de imágenes:
+
+```bash
+python tools/generar_imagenes.py
+```
+
+Si la ruta no existe, el archivo no es un BMP compatible o se ejecuta el
+programa sin una ruta, se muestra un mensaje de error y el programa termina
+con código 1.
+
 ## Integrantes
 
-- Jesús Eliuth Martínez Mendoza.
+- Julio César Islas Espino
+- Jesús Eliuth Martínez Mendoza
 - Miroslava Mora Espinosa
-- Pendiente de completar.
+- Leo Tintos
+
+## Entregables
+
+- [Reporte técnico](docs/reporte_tecnico.md)
+- [Diagrama de flujo en PDF](docs/diagrama_flujo.pdf)
+- [Código Mermaid del diagrama](docs/diagrama_flujo.mmd)
+- [Reporte de uso de modelo de lenguaje](REPORTE_LM.md)
+- [Banco de imágenes y resultados esperados](imagenes/README.md)
 
 ## Cómo colaborar
 
@@ -80,4 +115,3 @@ Color: #FF0000
    ```
 
 No trabajen directamente sobre `main`; cada cambio debe pasar por una rama y un Pull Request.
-

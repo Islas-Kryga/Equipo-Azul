@@ -1,0 +1,61 @@
+flowchart TD
+    A(["Entrada: python3 -m src.main [imagen.bmp]"]) --> B{"¿Se recibió exactamente<br/>1 argumento?"}
+    B -- No --> U[/"Imprime modo de uso"/] --> E1([Termina con código 1])
+    B -- Sí --> R1
+
+    subgraph READ["1. BmpReader: lectura"]
+        R1["Abrir archivo en modo binario"] --> R2["Validar cabeceras:<br/>firma BM, 1 plano,<br/>24 o 32 bits, sin compresión"]
+        R2 --> R3["Leer filas con relleno a 4 bytes<br/>Convertir BGR a RGB"]
+        R3 --> R4[("BmpImage")]
+    end
+
+    R4 --> S1
+
+    subgraph SEG["2. FigureSegmenter: segmentación"]
+        S1["Detectar fondo:<br/>color más frecuente del perímetro"] --> S2["Recorrer todos los píxeles"]
+        S2 --> S3{"¿Píxel visitado<br/>o de fondo?"}
+        S3 -- Sí --> S2
+        S3 -- No --> S4["BFS con vecindad-4<br/>sobre píxeles del mismo color"]
+        S4 --> S5[("FigureRegion:<br/>color, píxeles, caja delimitadora")]
+        S5 --> S2
+    end
+
+    S2 -- "Imagen escaneada por completo" --> L{{"Para cada figura"}}
+    L --> G1
+
+    subgraph GEO["3. GeometryAnalyzer: análisis"]
+        G1["Extraer frontera:<br/>píxeles con vecino fuera de la figura"] --> G3["Simplificar polígono con<br/>épsilon = 3% de la dimensión mayor"]
+        G3 --> G4["Esquinas = vértices restantes"]
+        G1 --> G5["¿Es círculo?: ancho ≈ alto y<br/>variación del radio &lt; 4%"]
+        G4 --> G6[("Características geométricas")]
+        G5 --> G6
+    end
+
+    G6 --> C1
+
+    subgraph CLS["4. ShapeClassifier: clasificación"]
+        C1{"¿Es círculo?"}
+        C1 -- Sí --> O["O: Círculo"]
+        C1 -- No --> C2{"¿Cuántas esquinas?"}
+        C2 -- "3" --> T["T: Triángulo"]
+        C2 -- "4" --> Q["C: Cuadrado"]
+        C2 -- "Otro" --> X["X: Cruz"]
+        O --> FR[("FigureResult:<br/>categoría y color")]
+        T --> FR
+        Q --> FR
+        X --> FR
+    end
+
+    FR --> L
+    L -- "Sin más figuras" --> P1
+
+    subgraph REP["5. ConsoleReporter: reporte"]
+        P1["Imprimir total de figuras"] --> P2["Imprimir categoría"] --> P3["Imprimir color en hexadecimal #RRGGBB"]
+    end
+
+    P3 --> E0([Termina con código 0])
+
+    R1 -. "BmpFileError" .-> ERR
+    R2 -. "BmpFormatError" .-> ERR
+    R3 -. "BmpFormatError" .-> ERR
+    ERR[/"Imprime Error: mensaje"/] --> E1

@@ -14,7 +14,7 @@ def main() -> int:
     """Ejecuta el flujo completo de reconocimiento de figuras."""
 
     if len(sys.argv) != 2:
-        print("Uso: python3 -m src.main <ruta_imagen.bmp>")
+        print("Uso: python -m src.main <ruta_imagen.bmp>")
         return 1
 
     image_path = sys.argv[1]
