@@ -13,9 +13,9 @@ El programa recibirá la ruta de una imagen `.bmp` y reportará las figuras enco
 
 ```text
 .
-├── docs/       # Reporte técnico y documentación
 ├── imagenes/   # Imágenes de prueba y resultados esperados
-├── REPORTE_LM.md  # Reporte de uso de modelo de lenguaje
+├── reportes/   # Reporte técnico y reporte de uso de modelo de lenguaje
+├── diagramas/  # Diagramas de flujo en PDF, PNG y Mermaid
 ├── src/        # Código fuente
 ├── tests/      # Pruebas automatizadas
 └── tools/      # Herramienta para regenerar el banco de imágenes
@@ -80,10 +80,11 @@ con código 1.
 
 ## Entregables
 
-- [Reporte técnico](docs/reporte_tecnico.md)
-- [Diagrama de flujo en PDF](docs/diagrama_flujo.pdf)
-- [Código Mermaid del diagrama](docs/diagrama_flujo.mmd)
-- [Reporte de uso de modelo de lenguaje](REPORTE_LM.md)
+- [Reporte técnico](reportes/reporte_tecnico.md)
+- [Reporte de uso de modelo de lenguaje](reportes/reporte_lm.md)
+- [Diagrama de flujo en PDF](diagramas/diagrama_flujo.pdf)
+- [Diagrama de flujo en PNG](diagramas/diagrama_flujo.png)
+- [Código Mermaid del diagrama](diagramas/diagrama_flujo.mmd)
 - [Banco de imágenes y resultados esperados](imagenes/README.md)
 
 ## Cómo colaborar

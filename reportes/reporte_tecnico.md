@@ -208,8 +208,9 @@ final.
 
 Se entregan las dos versiones originales:
 
-- [Diagrama de flujo en PDF](diagrama_flujo.pdf)
-- [Código fuente Mermaid del diagrama](diagrama_flujo.mmd)
+- [Diagrama de flujo en PDF](../diagramas/diagrama_flujo.pdf)
+- [Diagrama de flujo en PNG](../diagramas/diagrama_flujo.png)
+- [Código fuente Mermaid del diagrama](../diagramas/diagrama_flujo.mmd)
 
 El archivo Mermaid se conserva para que el equipo pueda hacer cambios si el
 profesor solicita alguna aclaración, mientras que el PDF sirve como versión
