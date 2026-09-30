@@ -76,7 +76,7 @@ con código 1.
 - Julio César Islas Espino
 - Jesús Eliuth Martínez Mendoza
 - Miroslava Mora Espinosa
-- Leo Tintos
+- Tintos Fabela Leonardo R.
 
 ## Entregables
 
