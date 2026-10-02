@@ -2,6 +2,10 @@
 
 Proyecto de Modelado y Programación para detectar y clasificar figuras geométricas en imágenes BMP.
 
+## Nombre del Equipo: 
+
+Equipo Azul
+
 ## Objetivo
 
 El programa recibirá la ruta de una imagen `.bmp` y reportará las figuras encontradas, indicando:
