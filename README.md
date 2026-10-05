@@ -96,8 +96,8 @@ con código 1.
 1. Clona el repositorio:
 
    ```bash
-   git clone https://github.com/Islas-Kryga/PROYECTO-1-MYP.git
-   cd PROYECTO-1-MYP
+   git clone https://github.com/Islas-Kryga/Equipo-Azul.git
+   cd Equipo-Azul
    ```
 
 2. Crea una rama para tu cambio:
